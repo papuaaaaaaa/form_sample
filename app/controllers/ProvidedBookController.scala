@@ -8,6 +8,6 @@ import play.api.mvc._
 
 object ProvidedBookController extends Controller{
   def index = Action {
-    Ok("called index in provided book controller")
+    Ok(views.html.provided.index("provided books"))
   }
 }
