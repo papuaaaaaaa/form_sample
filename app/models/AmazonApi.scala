@@ -3,21 +3,27 @@
  */
 package models
 
-import play.api.libs.ws._
-import scala.concurrent.Future
-import play.Play
 import play.api.Play.current
+import play.api.libs.ws._
+
+import scala.collection.JavaConversions._
+import scala.collection.mutable.Map
+import scala.concurrent.Future
 
 object AmazonApi {
   def search(keywords:String):Future[WSResponse] = {
+    val params = Map(
+      "Service" -> "AWSECommerceService",
+      "Operation" -> "ItemSearch",
+      "Keywords" -> keywords,
+      "SearchIndex" -> "Books"
+    )
+    val url = new SignedRequestsHelper().sign(params)
+    println(url)
+    println("---")
     val holder : WSRequestHolder = WS
-      .url("http://ecs.amazonaws.com/onca/xml")
+      .url(url)
       .withRequestTimeout(10000)
-      .withQueryString({"Service" -> "AWSECommerceService"})
-      .withQueryString({"AWSAccessKeyId" -> Play.application.configuration.getString("amazon.api.key")})
-      .withQueryString({"Operation" -> "ItemSearch"})
-      .withQueryString({"Keywords" -> keywords})
-      .withQueryString({"SearchIndex" -> "Books"})
       .withFollowRedirects(true)
     holder.get()
   }
