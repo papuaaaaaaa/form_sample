@@ -1,0 +1,15 @@
+@(form: Form[User])
+
+@main("register") {
+
+    <h1>User Registration</h1>
+    @helper.form(action = routes.UserController.register) {
+        <fieldset>
+            <legend>input user info.</legend>
+            @helper.inputText(form("name"))
+            @helper.inputText(form("mail"))
+        </fieldset>
+        <input type="submit" value="entry">
+    }
+    <a href="/">back</a>
+}
