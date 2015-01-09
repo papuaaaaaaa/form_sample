@@ -4,13 +4,18 @@
 
 package controllers
 
-import models.AmazonApi
+import models.AmazonProductAdvertisting
 import play.api.mvc._
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object WantedBookController extends Controller {
-  def index = Action.async {
-    AmazonApi.search("企業").map(res =>
+  def index = Action {
+    Ok(views.html.wanted.index("form"))
+  }
+
+  def search = Action.async {
+    AmazonProductAdvertisting.search("企業").map(res =>
       Ok(views.html.wanted.index(res.xml.toString()))
     )
   }
