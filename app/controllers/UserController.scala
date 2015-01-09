@@ -18,7 +18,7 @@ object UserController extends Controller {
 
   def index = Action {
     val filledForm = form.fill(User("user name", "email address"))
-    Ok(views.html.user.index(filledForm))
+    Ok(views.html.user.form(filledForm))
   }
 
 
