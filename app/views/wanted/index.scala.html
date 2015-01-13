@@ -1,8 +1,14 @@
-@(message: String)
+@(keyword:String, books: Seq[Book], response:String)
 
-@main(message) {
+@main("Wanted Books") {
 
-    <h1>@{message + " list."}</h1>
+    <h1>@{"「" + keyword + "」の検索結果"}</h1>
+    <ul>
+    @for(book <- books) {
+        <li>@{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}</li>
+    }
+    </ul>
+    <p>@response</p>
     <a href="/">back</a>
 
 }

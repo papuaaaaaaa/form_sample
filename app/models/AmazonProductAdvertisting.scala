@@ -17,6 +17,7 @@ import play.api.libs.ws.{WS, WSRequestHolder, WSResponse}
 
 import scala.collection.SortedMap
 import scala.concurrent.Future
+import scala.xml.{Elem, Text}
 
 object AmazonProductAdvertisting {
 
@@ -89,7 +90,8 @@ object AmazonProductAdvertisting {
       "ItemSearch",
       Map(
         "Keywords"->keywords,
-        "SearchIndex"->"Books"))
+        "SearchIndex"->"Books",
+        "ResponseGroup"->"Medium"))
     //"Service" -> "AWSECommerceService",
 
     val holder : WSRequestHolder = WS
@@ -99,4 +101,17 @@ object AmazonProductAdvertisting {
     holder.get()
   }
 
+  def parseXml(response:Elem):Seq[Book] = {
+    for (
+      item <- (response \\ "Item")
+    ) yield {
+      val attribute = item \ "ItemAttributes"
+
+      val title = attribute \ "Title"
+      val author = attribute \ "Author"
+      val isbn = attribute \ "ISBN"
+      val imageUrl = (item \\ "ImageSet").filter(_ \ "@Category" contains Text("variant")) \ "MediumImage" \ "URL"
+      new Book(title.text, author.text, isbn.text, imageUrl.text)
+    }
+  }
 }

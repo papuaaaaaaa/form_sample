@@ -8,7 +8,6 @@ import models.AmazonProductAdvertisting
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc._
-
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object WantedBookController extends Controller {
@@ -20,7 +19,8 @@ object WantedBookController extends Controller {
     val form = Form("keyword" -> text)
     val keyword = form.bindFromRequest.get
     AmazonProductAdvertisting.search(keyword).map(res =>
-      Ok(views.html.wanted.index(res.xml.toString()))
+      //AmazonProductAdvertisting.parseXml(res.xml)
+      Ok(views.html.wanted.index(keyword, AmazonProductAdvertisting.parseXml(res.xml), res.xml.toString))
     )
   }
 }
