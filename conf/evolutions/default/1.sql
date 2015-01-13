@@ -1,7 +1,8 @@
 # --- !Ups
 CREATE TABLE user_table (
-  name  VARCHAR (30),
-  mail  VARCHAR (30)
+  id    SERIAL NOT NULL PRIMARY KEY,
+  name  TEXT,
+  mail  TEXT
 );
 
 
