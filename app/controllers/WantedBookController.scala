@@ -18,9 +18,9 @@ object WantedBookController extends Controller {
   def search = Action.async { implicit request =>
     val form = Form("keyword" -> text)
     val keyword = form.bindFromRequest.get
-    AmazonProductAdvertisting.search(keyword).map(res =>
-      //AmazonProductAdvertisting.parseXml(res.xml)
-      Ok(views.html.wanted.index(keyword, AmazonProductAdvertisting.parseXml(res.xml), res.xml.toString))
-    )
+    AmazonProductAdvertisting.search(keyword).map(res => {
+      val items = AmazonProductAdvertisting.parseXml(res.xml)
+      Ok(views.html.wanted.index(keyword, items, res.xml.toString))
+    })
   }
 }
