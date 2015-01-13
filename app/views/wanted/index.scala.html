@@ -5,7 +5,10 @@
     <h1>@{"「" + keyword + "」の検索結果"}</h1>
     <ul>
     @for(book <- books) {
-        <li>@{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}</li>
+        <li>
+            @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
+            <a class="btn btn-default">追加</a>
+        </li>
     }
     </ul>
     <p>@response</p>
