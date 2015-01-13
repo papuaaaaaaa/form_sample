@@ -3,12 +3,13 @@
 # ~~~~
 
 # Home page
-GET        /                      controllers.Application.index
+GET         /                      controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file          controllers.Assets.at(path="/public", file)
+GET         /assets/*file          controllers.Assets.at(path="/public", file)
 
-GET        /wanted_books          controllers.WantedBookController.index()
-GET        /provided_books        controllers.ProvidedBookController.index()
-GET        /user                  controllers.UserController.index
-POST       /user/register         controllers.UserController.register
+GET         /wanted_books          controllers.WantedBookController.index()
+POST        /wanted_books/search   controllers.WantedBookController.search()
+GET         /provided_books        controllers.ProvidedBookController.index()
+GET         /user                  controllers.UserController.index
+POST        /user/register         controllers.UserController.register
