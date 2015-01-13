@@ -10,17 +10,30 @@ import play.api.Play.current
 case class User (name:String, mail:String) {
   def save = {
     DB.withConnection { implicit c =>
-      val count = SQL(
+      SQL(
         """
-            INSERT INTO user_table(name, mail) VALUES({name}, {mail});
-        """
-      ).on('name -> name,
-          'mail -> mail).executeUpdate()
-      count
+          |INSERT INTO user_table(name, mail) VALUES({name}, {mail});
+        """.stripMargin).on(
+          'name -> name,
+          'mail -> mail
+        ).executeUpdate()
     }
-
-//    DB.withTransaction { implicit conn =>
-//      // このブロックの処理は1つのトランザクションとなります
-//    }
   }
+
+  def delete = {
+    DB.withConnection { implicit c =>
+      SQL(
+        """
+          |DELETE FROM user_table WHERE name={name} AND mail={mail};
+        """
+      ).on(
+          'name -> name,
+          'mail -> mail
+        ).executeUpdate()
+    }
+  }
+
+  //    DB.withTransaction { implicit conn =>
+  //      // このブロックの処理は1つのトランザクションとなります
+  //    }
 }
