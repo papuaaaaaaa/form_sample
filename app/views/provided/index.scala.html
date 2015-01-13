@@ -1,8 +1,14 @@
-@(message: String)
+@(message: String, books:List[Book])
 
 @main(message) {
 
     <h1>@{message + " list."}</h1>
+    <ul>
+        @for(book <- books) {
+            <li>@{book.title}</li>
+        }
+    </ul>
     <a href="/">back</a>
+    <a href="/provided_books/add">add</a>
 
 }

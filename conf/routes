@@ -13,3 +13,4 @@ POST        /wanted_books/search        controllers.WantedBookController.search(
 GET         /provided_books             controllers.ProvidedBookController.index()
 GET         /user                       controllers.UserController.index
 POST        /user/register              controllers.UserController.register
+GET         /provided_books/add         controllers.ProvidedBookController.add()
