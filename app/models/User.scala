@@ -12,7 +12,7 @@ case class User (name:String, mail:String) {
     DB.withConnection { implicit c =>
       SQL(
         """
-          |INSERT INTO user_table(name, mail) VALUES({name}, {mail});
+          INSERT INTO user_table(name, mail) VALUES({name}, {mail});
         """.stripMargin).on(
           'name -> name,
           'mail -> mail
@@ -24,7 +24,7 @@ case class User (name:String, mail:String) {
     DB.withConnection { implicit c =>
       SQL(
         """
-          |DELETE FROM user_table WHERE name={name} AND mail={mail};
+          DELETE FROM user_table WHERE name={name} AND mail={mail};
         """
       ).on(
           'name -> name,
@@ -37,7 +37,7 @@ case class User (name:String, mail:String) {
     DB.withConnection { implicit c =>
       SQL(
         """
-          |UPDATE SET name={name}, mail={mail}
+          UPDATE SET name={name}, mail={mail}
         """
       ).on(
           'name -> name,
@@ -49,4 +49,20 @@ case class User (name:String, mail:String) {
   //    DB.withTransaction { implicit conn =>
   //      // このブロックの処理は1つのトランザクションとなります
   //    }
+}
+
+object User {
+  def providedBooks = {
+    DB.withConnection { implicit c =>
+      SQL(
+        """
+          SELECT * FROM provided_book_table;
+        """
+      ).apply.map(row => {
+        //new Book(row[Int]("id"), row[Int]("user_id"), row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"))
+        new Book(row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"))
+      }).toList
+
+    }
+  }
 }
