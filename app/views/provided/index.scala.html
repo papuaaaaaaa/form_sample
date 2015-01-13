@@ -4,9 +4,11 @@
 
     <h1>@{message + " list."}</h1>
     <ul>
-        @for(book <- books) {
-            <li>@{book.title}</li>
-        }
+    @for(book <- books) {
+        <li>
+            @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
+        </li>
+    }
     </ul>
     <a href="/">back</a>
     <a href="/provided_books/add">add</a>
