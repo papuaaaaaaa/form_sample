@@ -10,13 +10,13 @@ import play.api.Play.current
 case class User (name:String, mail:String) {
   def save = {
     DB.withConnection { implicit c =>
-      SQL(
+      val count = SQL(
         """
-            INSERT INTO user_table(name, mail)
-            VALUES({name}, {mail})
+            INSERT INTO user_table(name, mail) VALUES({name}, {mail});
         """
       ).on('name -> name,
-          'mail -> mail).execute()
+          'mail -> mail).executeUpdate()
+      count
     }
 
 //    DB.withTransaction { implicit conn =>

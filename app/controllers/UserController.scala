@@ -24,7 +24,10 @@ object UserController extends Controller {
 
   def register = Action { implicit request =>
     val user = form.bindFromRequest.get
-    user.save
-    Ok(views.html.user.confirm("User registered name=\"" + user.name + "\" mail=\"" + user.mail + "\"."))
+    if (user.save > 0) {
+      Ok(views.html.user.confirm("User registered name=\"" + user.name + "\" mail=\"" + user.mail + "\"."))
+    } else {
+      Ok(views.html.user.confirm("Error at save."))
+    }
   }
 }
