@@ -33,6 +33,19 @@ case class User (name:String, mail:String) {
     }
   }
 
+  def update = {
+    DB.withConnection { implicit c =>
+      SQL(
+        """
+          |UPDATE SET name={name}, mail={mail}
+        """
+      ).on(
+          'name -> name,
+          'mail -> mail
+        ).executeUpdate()
+    }
+  }
+
   //    DB.withTransaction { implicit conn =>
   //      // このブロックの処理は1つのトランザクションとなります
   //    }
