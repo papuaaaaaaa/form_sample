@@ -1,16 +1,11 @@
 @(message: String, books:List[Book])
 
+@import common.book_list
+
 @main(message) {
 
     <h1>@{message + " list."}</h1>
-    <ul>
-    @for(book <- books) {
-        <li>
-            @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
-        </li>
-    }
-    </ul>
+    @book_list(books)
     <a href="/">back</a>
-    <a href="/provided_books/add">add</a>
 
 }

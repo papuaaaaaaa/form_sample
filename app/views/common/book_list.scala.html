@@ -1,0 +1,16 @@
+@(books:List[Book])
+
+<ul>
+@for(book <- books) {
+    <li>
+        @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
+        @helper.form(action = routes.ProvidedBookController.register) {
+            <input type="hidden" name="title" value="@{book.title}"/>
+            <input type="hidden" name="author" value="@{book.author}"/>
+            <input type="hidden" name="isbn" value="@{book.isbn}"/>
+            <input type="hidden" name="imageUrl" value="@{book.imageUrl}"/>
+            <input type="submit" class="btn default-btn" value="追加"/>
+        }
+    </li>
+}
+</ul>

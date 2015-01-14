@@ -3,6 +3,7 @@
 @main(message) {
 
     <h1>@{message + " list."}</h1>
+    @book_list(books)
     <ul>
     @for(book <- books) {
         <li>

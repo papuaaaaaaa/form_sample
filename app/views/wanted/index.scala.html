@@ -1,16 +1,11 @@
 @(keyword:String, books: Seq[Book], response:String)
 
+@import common.book_list
+
 @main("Wanted Books") {
 
     <h1>@{"「" + keyword + "」の検索結果"}</h1>
-    <ul>
-    @for(book <- books) {
-        <li>
-            @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
-            <a class="btn btn-default">追加</a>
-        </li>
-    }
-    </ul>
+    @book_list(books.toList)
     <p>@response</p>
     <a href="/">back</a>
 
