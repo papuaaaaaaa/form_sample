@@ -1,0 +1,14 @@
+@(message: String, books:List[Book])
+
+@main(message) {
+
+    <h1>@{message + " list."}</h1>
+    <ul>
+    @for(book <- books) {
+        <li>
+        @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
+        </li>
+    }
+    </ul>
+    <a href="/provided_books">back</a>
+}
