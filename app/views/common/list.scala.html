@@ -4,7 +4,15 @@
 @for(book <- books) {
     <li>
         @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
-        <a href="/provided_books/delete">削除</a>
+        @helper.form(action = routes.ProvidedBookController.delete) {
+            <input type="hidden" name="title" value="@{book.title}"/>
+            <input type="hidden" name="author" value="@{book.author}"/>
+            <input type="hidden" name="isbn" value="@{book.isbn}"/>
+            <input type="hidden" name="imageUrl" value="@{book.imageUrl}"/>
+            <input type="hidden" name="id" value="@{book.id}"/>
+            <input type="hidden" name="userId" value="@{book.userId}"/>
+            <input type="submit" class="btn default-btn" value="削除"/>
+        }
     </li>
 }
 </ul>

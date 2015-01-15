@@ -9,4 +9,9 @@ object WantedBook {
     val tableName = TableNameConstant.WANTED_BOOK
     new Book(title, author, isbn, imageUrl, tableName, id, userId)
   }
+
+  def unapply(book:Book) = {
+    //except tableName
+    Option((book.title, book.author, book.isbn, book.imageUrl, book.id, book.userId))
+  }
 }

@@ -30,9 +30,10 @@ case class Book(val title:String, val author:String, val isbn:String, val imageU
   def delete = {
     DB.withConnection { implicit c =>
       SQL(
-        "DELETE FROM " + tableName + " WHERE id={id} " +
+        "DELETE FROM " + tableName +
+          " WHERE id={id} " +
           "AND user_id={userId} " +
-          "AND tile={title} " +
+          "AND title={title} " +
           "AND author={author}" +
           "AND isbn={isbn} " +
           "AND image_url={imageUrl};"

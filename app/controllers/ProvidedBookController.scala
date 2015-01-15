@@ -12,15 +12,6 @@ import play.api.mvc.{Action, Controller}
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object ProvidedBookController extends Controller{
-  val form = Form (
-    mapping(
-      "title" -> text,
-      "author" -> text,
-      "isbn" -> text,
-      "imageUrl" -> text
-    )((title, author, isbn, imageUrl) => ProvidedBook(title, author, isbn, imageUrl))
-      ((book:Book) => Some(book.title, book.author, book.isbn, book.imageUrl))
-  )
 
   def index = Action {
     Ok(views.html.provided.index("provided books", User.providedBooks))
@@ -41,6 +32,15 @@ object ProvidedBookController extends Controller{
   }
 
   def register = Action { implicit request =>
+    val form = Form (
+      mapping(
+        "title" -> text,
+        "author" -> text,
+        "isbn" -> text,
+        "imageUrl" -> text
+      )((title, author, isbn, imageUrl) => ProvidedBook(title, author, isbn, imageUrl))
+        ((book:Book) => Some(book.title, book.author, book.isbn, book.imageUrl))
+    )
     val book = form.bindFromRequest.get
     if (book.save > 0) {
       Redirect("/provided_books")
@@ -50,6 +50,16 @@ object ProvidedBookController extends Controller{
   }
 
   def delete = Action { implicit request =>
+    val form = Form (
+      mapping(
+        "title" -> text,
+        "author" -> text,
+        "isbn" -> text,
+        "imageUrl" -> text,
+        "id" -> number,
+        "userId" -> number
+      )(ProvidedBook.apply)(ProvidedBook.unapply)
+    )
     val book = form.bindFromRequest.get
     if (book.delete > 0) {
       Redirect("/provided_books")
