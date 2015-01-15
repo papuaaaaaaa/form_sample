@@ -64,7 +64,7 @@ object ProvidedBookController extends Controller{
     if (book.delete > 0) {
       Redirect("/provided_books")
     } else {
-      Redirect("/")
+      Ok(views.html.common.error("can not delete provided book"))
     }
   }
 }
