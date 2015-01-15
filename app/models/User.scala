@@ -59,8 +59,7 @@ object User {
           SELECT * FROM provided_book_table;
         """
       ).apply.map(row => {
-        //new Book(row[Int]("id"), row[Int]("user_id"), row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"))
-        ProvidedBook(row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"))
+        ProvidedBook(row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"), row[Int]("id"), row[Int]("user_id"))
       }).toList
 
     }
