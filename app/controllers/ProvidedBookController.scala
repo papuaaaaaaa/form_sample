@@ -18,7 +18,7 @@ object ProvidedBookController extends Controller{
   }
 
   def form = Action {
-    Ok(views.html.search.form("search provided books!!!", "/provided_books/search"))
+    Ok(views.html.search.form("search", "/provided_books/search"))
   }
 
 

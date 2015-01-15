@@ -64,4 +64,17 @@ object User {
 
     }
   }
+
+  def wantedBooks = {
+    DB.withConnection { implicit c =>
+      SQL(
+        """
+          SELECT * FROM wanted_book_table;
+        """
+      ).apply.map(row => {
+        ProvidedBook(row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"), row[Int]("id"), row[Int]("user_id"))
+      }).toList
+
+    }
+  }
 }
