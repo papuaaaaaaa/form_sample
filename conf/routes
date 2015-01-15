@@ -9,7 +9,10 @@ GET         /                               controllers.Application.index
 GET         /assets/*file                   controllers.Assets.at(path="/public", file)
 
 GET         /wanted_books                   controllers.WantedBookController.index
+GET         /wanted_books/form              controllers.WantedBookController.form
 POST        /wanted_books/search            controllers.WantedBookController.search
+POST        /wanted_books/register          controllers.WantedBookController.register
+POST        /wanted_books/delete            controllers.WantedBookController.delete
 
 
 GET         /provided_books                 controllers.ProvidedBookController.index
