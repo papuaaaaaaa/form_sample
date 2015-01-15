@@ -11,10 +11,11 @@ GET         /assets/*file                   controllers.Assets.at(path="/public"
 GET         /wanted_books                   controllers.WantedBookController.index
 POST        /wanted_books/search            controllers.WantedBookController.search
 
+
 GET         /provided_books                 controllers.ProvidedBookController.index
-GET         /provided_books/add             controllers.ProvidedBookController.add
+GET         /provided_books/form            controllers.ProvidedBookController.form
+POST        /provided_books/search          controllers.ProvidedBookController.search
 POST        /provided_books/register        controllers.ProvidedBookController.register
-POST        /provided_books/search          controllers.WantedBookController.search
 POST        /provided_books/delete          controllers.ProvidedBookController.delete
 
 GET         /user                           controllers.UserController.index

@@ -17,7 +17,7 @@ object ProvidedBookController extends Controller{
     Ok(views.html.provided.index("provided books", User.providedBooks))
   }
 
-  def add = Action {
+  def form = Action {
     Ok(views.html.search.form("search provided books!!!", "/provided_books/search"))
   }
 
