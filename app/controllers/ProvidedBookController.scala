@@ -4,7 +4,7 @@
 
 package controllers
 
-import models.{AmazonProductAdvertisting, Book, User}
+import models.{ProvidedBook, AmazonProductAdvertisting, Book, User}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
@@ -18,7 +18,8 @@ object ProvidedBookController extends Controller{
       "author" -> text,
       "isbn" -> text,
       "imageUrl" -> text
-    )(Book.apply)(Book.unapply)
+    )((title, author, isbn, imageUrl) => ProvidedBook(title, author, isbn, imageUrl))
+      ((book:Book) => Some(book.title, book.author, book.isbn, book.imageUrl))
   )
 
   def index = Action {
@@ -42,6 +43,15 @@ object ProvidedBookController extends Controller{
   def register = Action { implicit request =>
     val book = form.bindFromRequest.get
     if (book.save > 0) {
+      Redirect("/provided_books")
+    } else {
+      Redirect("/")
+    }
+  }
+
+  def delete = Action { implicit request =>
+    val book = form.bindFromRequest.get
+    if (book.delete > 0) {
       Redirect("/provided_books")
     } else {
       Redirect("/")

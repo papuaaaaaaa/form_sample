@@ -4,6 +4,7 @@
 @for(book <- books) {
     <li>
         @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
+        <a href="/provided_books/delete">削除</a>
     </li>
 }
 </ul>

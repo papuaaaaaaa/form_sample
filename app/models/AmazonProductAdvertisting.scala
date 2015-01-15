@@ -111,7 +111,7 @@ object AmazonProductAdvertisting {
       val author = attribute \ "Author"
       val isbn = attribute \ "ISBN"
       val imageUrl = (item \\ "ImageSet").filter(_ \ "@Category" contains Text("variant")) \ "MediumImage" \ "URL"
-      new Book(title.text, author.text, isbn.text, imageUrl.text)
+      ProvidedBook(title.text, author.text, isbn.text, imageUrl.text)
     }
   }
 }

@@ -60,7 +60,7 @@ object User {
         """
       ).apply.map(row => {
         //new Book(row[Int]("id"), row[Int]("user_id"), row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"))
-        new Book(row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"))
+        ProvidedBook(row[String]("title"), row[String]("author"), row[String]("isbn"), row[String]("image_url"))
       }).toList
 
     }
