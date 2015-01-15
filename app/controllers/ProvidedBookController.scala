@@ -19,7 +19,7 @@ object ProvidedBookController extends Controller{
   }
 
   def form = Action {
-    Ok(views.html.search.form("search", routes.ProvidedBookController.search, "/provided_books/search"))
+    Ok(views.html.search.form("search", routes.ProvidedBookController.search, "/provided_books"))
   }
 
 
