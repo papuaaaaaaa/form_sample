@@ -1,0 +1,9 @@
+@(books:List[Book])
+
+<ul>
+@for(book <- books) {
+    <li>
+        @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
+    </li>
+}
+</ul>

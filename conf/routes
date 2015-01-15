@@ -14,7 +14,7 @@ POST        /wanted_books/search            controllers.WantedBookController.sea
 GET         /provided_books                 controllers.ProvidedBookController.index()
 GET         /provided_books/add             controllers.ProvidedBookController.add()
 POST        /provided_books/register        controllers.ProvidedBookController.register()
-POST        /provided_books/search            controllers.WantedBookController.search()
+POST        /provided_books/search          controllers.WantedBookController.search()
 
 GET         /user                           controllers.UserController.index
 POST        /user/register                  controllers.UserController.register

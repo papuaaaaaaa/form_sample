@@ -1,11 +1,11 @@
 @(keyword:String, books: Seq[Book], response:String)
 
-@import common.book_list
+@import search.list
 
 @main("Wanted Books") {
 
     <h1>@{"「" + keyword + "」の検索結果"}</h1>
-    @book_list(books.toList)
+    @list(books.toList)
     <p>@response</p>
     <a href="/">back</a>
 

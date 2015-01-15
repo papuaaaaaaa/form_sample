@@ -12,7 +12,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object WantedBookController extends Controller {
   def index = Action {
-    Ok(views.html.common.search_form("form"))
+    Ok(views.html.search.form("form", "/wanted_books/search"))
   }
 
   def search = Action.async { implicit request =>

@@ -26,7 +26,7 @@ object ProvidedBookController extends Controller{
   }
 
   def add = Action {
-    Ok(views.html.common.search_form("search provided books!!!"))
+    Ok(views.html.search.form("search provided books!!!", "/provided_books/search"))
   }
 
 

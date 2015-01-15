@@ -1,12 +1,10 @@
 @(message: String, books:List[Book])
 
-@import common.list
+@import search.list
 
 @main(message) {
 
     <h1>@{message + " list."}</h1>
     @list(books)
-    <a href="/">back</a>
-    <a href="/provided_books/add">search</a>
-
+    <a href="/provided_books">back</a>
 }

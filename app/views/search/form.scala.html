@@ -1,9 +1,9 @@
-@(message: String)
+@(message: String, action: String)
 
 @main(message) {
 
     <h1>Form</h1>
-    <form id="searchForm" action="/provided/search" method="post">
+    <form id="searchForm" action=@action method="post">
         <input type="text" name="keyword"/>
         <input type="submit" name="submit" value="検索"/>
     </form>
