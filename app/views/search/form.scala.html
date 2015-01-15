@@ -1,11 +1,12 @@
-@(message: String, action: String)
+@(title: String, action: String)
 
-@main(message) {
+@main(title) {
 
     <h1>Form</h1>
     <form id="searchForm" action=@action method="post">
         <input type="text" name="keyword"/>
         <input type="submit" name="submit" value="検索"/>
     </form>
+    <a href=@{"/" + action.split("/")(1)}>back</a>
 
 }
