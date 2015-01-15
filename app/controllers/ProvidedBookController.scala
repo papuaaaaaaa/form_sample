@@ -14,7 +14,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 object ProvidedBookController extends Controller{
 
   def index = Action {
-    Ok(views.html.provided.index("provided books", User.providedBooks))
+    Ok(views.html.common.index("provided books", User.providedBooks))
   }
 
   def form = Action {
