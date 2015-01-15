@@ -22,9 +22,5 @@ case class Book(val title:String, val author:String, val isbn:String, val imageU
           'imageUrl -> imageUrl
         ).executeUpdate()
     }
-
-    def delete = {
-
-    }
   }
 }
