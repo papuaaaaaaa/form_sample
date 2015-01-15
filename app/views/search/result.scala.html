@@ -1,10 +1,10 @@
-@(message: String, books:List[Book])
+@(title: String, books:List[Book], backPath:String, registerCall:Call)
 
 @import search.list
 
-@main(message) {
+@main(title) {
 
-    <h1>@{message + " list."}</h1>
-    @list(books)
-    <a href="/provided_books">back</a>
+    <h1>@{title + " list."}</h1>
+    @list(books, registerCall)
+    <a href=@backPath>back</a>
 }

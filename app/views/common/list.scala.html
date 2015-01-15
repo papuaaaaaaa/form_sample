@@ -1,10 +1,10 @@
-@(books:List[Book])
+@(books:List[Book], action:Call)
 
 <ul>
 @for(book <- books) {
     <li>
         @{"title=" + book.title + ", author=" + book.author + ", isbn=" + book.isbn + ", image=" + book.imageUrl}
-        @helper.form(action = routes.ProvidedBookController.delete) {
+        @helper.form(action = action) {
             <input type="hidden" name="title" value="@{book.title}"/>
             <input type="hidden" name="author" value="@{book.author}"/>
             <input type="hidden" name="isbn" value="@{book.isbn}"/>

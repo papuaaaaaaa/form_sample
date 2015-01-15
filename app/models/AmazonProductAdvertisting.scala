@@ -101,7 +101,21 @@ object AmazonProductAdvertisting {
     holder.get()
   }
 
-  def parseXml(response:Elem):Seq[Book] = {
+  def parseXmlForWanted(response:Elem):Seq[Book] = {
+    for (
+      item <- (response \\ "Item")
+    ) yield {
+      val attribute = item \ "ItemAttributes"
+
+      val title = attribute \ "Title"
+      val author = attribute \ "Author"
+      val isbn = attribute \ "ISBN"
+      val imageUrl = (item \\ "ImageSet").filter(_ \ "@Category" contains Text("variant")) \ "MediumImage" \ "URL"
+      WantedBook(title.text, author.text, isbn.text, imageUrl.text)
+    }
+  }
+
+  def parseXmlForProvided(response:Elem):Seq[Book] = {
     for (
       item <- (response \\ "Item")
     ) yield {

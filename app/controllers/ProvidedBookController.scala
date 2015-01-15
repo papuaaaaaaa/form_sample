@@ -14,11 +14,12 @@ import scala.concurrent.ExecutionContext.Implicits.global
 object ProvidedBookController extends Controller{
 
   def index = Action {
-    Ok(views.html.common.index("provided books", User.providedBooks))
+    Ok(views.html.common.index("provided books", User.providedBooks,
+      routes.ProvidedBookController.delete, "/provided_books/form"))
   }
 
   def form = Action {
-    Ok(views.html.search.form("search", "/provided_books/search"))
+    Ok(views.html.search.form("search", routes.ProvidedBookController.search, "/provided_books/search"))
   }
 
 
@@ -26,8 +27,8 @@ object ProvidedBookController extends Controller{
     val form = Form("keyword" -> text)
     val keyword = form.bindFromRequest.get
     AmazonProductAdvertisting.search(keyword).map(res => {
-      val items = AmazonProductAdvertisting.parseXml(res.xml)
-      Ok(views.html.wanted.index(keyword, items, res.xml.toString))
+      val items = AmazonProductAdvertisting.parseXmlForProvided(res.xml)
+      Ok(views.html.search.result("provided book", items.toList, "/provided_books", routes.ProvidedBookController.register))
     })
   }
 

@@ -1,12 +1,12 @@
-@(message: String, books:List[Book])
+@(message: String, books:List[Book], searchAction:Call, listPath:String)
 
 @import common.list
 
 @main(message) {
 
     <h1>@{message + " list."}</h1>
-    @list(books)
+    @list(books, searchAction)
     <a href="/">back</a>
-    <a href="/provided_books/form">search</a>
+    <a href=@listPath>search</a>
 
 }

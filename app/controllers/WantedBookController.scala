@@ -13,19 +13,20 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object WantedBookController extends Controller {
   def index = Action {
-    Ok(views.html.common.index("wanted books", User.wantedBooks))
+    Ok(views.html.common.index("wanted books", User.wantedBooks,
+      routes.WantedBookController.delete, "/wanted_books/form"))
   }
 
   def form = Action {
-    Ok(views.html.search.form("search", "/wanted_books/search"))
+    Ok(views.html.search.form("search", routes.WantedBookController.search, "/wanted_books"))
   }
 
   def search = Action.async { implicit request =>
     val form = Form("keyword" -> text)
     val keyword = form.bindFromRequest.get
     AmazonProductAdvertisting.search(keyword).map(res => {
-      val items = AmazonProductAdvertisting.parseXml(res.xml)
-      Ok(views.html.wanted.index(keyword, items, res.xml.toString))
+      val items = AmazonProductAdvertisting.parseXmlForWanted(res.xml)
+      Ok(views.html.search.result("wanted book", items.toList, "/wanted_books", routes.WantedBookController.register))
     })
   }
 
@@ -41,7 +42,7 @@ object WantedBookController extends Controller {
     )
     val book = form.bindFromRequest.get
     if (book.save > 0) {
-      Redirect("/provided_books")
+      Redirect("/wanted_books")
     } else {
       Redirect("/")
     }
@@ -60,9 +61,9 @@ object WantedBookController extends Controller {
     )
     val book = form.bindFromRequest.get
     if (book.delete > 0) {
-      Redirect("/provided_books")
+      Redirect("/wanted_books")
     } else {
-      Ok(views.html.common.error("can not delete provided book"))
+      Ok(views.html.common.error("can not delete wanted book"))
     }
   }
 }
