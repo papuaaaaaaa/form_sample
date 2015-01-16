@@ -12,6 +12,7 @@ import play.api.mvc._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object WantedBookController extends Controller {
+
   def index = Action {
     Ok(views.html.common.index("wanted books", User.wantedBooks,
       routes.WantedBookController.delete, "/wanted_books/form"))
